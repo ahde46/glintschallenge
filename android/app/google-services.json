@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "843972580045",
+    "project_id": "glints-challenge",
+    "storage_bucket": "glints-challenge.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:843972580045:android:b1ea66b144e388ad178f84",
+        "android_client_info": {
+          "package_name": "com.lekde.glistschallenge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "843972580045-o9cdpnp3j0j9h3a04j731e1cq2umcb97.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lekde.glistschallenge",
+            "certificate_hash": "01bef0e9280b34bce51feb7dee43a2aee5440a9b"
+          }
+        },
+        {
+          "client_id": "843972580045-qnrvbfsghrt9rfalvq08mdouddg4791u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lekde.glistschallenge",
+            "certificate_hash": "3e47b1fd4a37874656637e25f1df52171d98f78d"
+          }
+        },
+        {
+          "client_id": "843972580045-fsvb3fv0g31bc8e46mb7t2tr4imjb4an.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzB-GqWQWnvOV9yNZH3_9SMK1getgfne0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "843972580045-fsvb3fv0g31bc8e46mb7t2tr4imjb4an.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
