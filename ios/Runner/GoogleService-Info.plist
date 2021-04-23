@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>843972580045-aeehljdpui6qdds2ui3nirm7c8pm8is1.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.843972580045-aeehljdpui6qdds2ui3nirm7c8pm8is1</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>843972580045-o9cdpnp3j0j9h3a04j731e1cq2umcb97.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCKX-4fbPqY9pefX3XO_2vJQQLqSs_W-4Y</string>
+	<key>GCM_SENDER_ID</key>
+	<string>843972580045</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.lekde.glistschallenge</string>
+	<key>PROJECT_ID</key>
+	<string>glints-challenge</string>
+	<key>STORAGE_BUCKET</key>
+	<string>glints-challenge.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:843972580045:ios:dec3806ce6e6e5a4178f84</string>
+</dict>
+</plist>
