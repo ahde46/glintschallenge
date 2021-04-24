@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:glistschallenge/base/base_presenter.dart';
 import 'package:glistschallenge/base/base_view.dart';
 
-abstract class LoginPageView implements BaseView {
+abstract class ForgotPasswordPageView implements BaseView {
   GlobalKey<FormState> formKey;
 }
 
-class LoginPagePresenter extends BasePresenter<LoginPageView> {
+class ForgotPasswordPagePresenter
+    extends BasePresenter<ForgotPasswordPageView> {
   String email;
-  String password;
 
-  Future<void> login() async {
+  Future<void> recoverPassword() async {
     if (view.formKey.currentState.validate()) {
-      print("email: $email");
-      print("password: $password");
+      print("email $email");
     }
   }
 }
