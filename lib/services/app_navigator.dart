@@ -28,8 +28,9 @@ class AppNavigator {
   static Future<T> pushAndRemoveUntil<T>(BuildContext context, Widget page) {
     return Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(
-          builder: (context) => page,
+        PageRouteBuilder(
+          pageBuilder: (context, animation1, animation2) => page,
+          transitionDuration: Duration(seconds: 0),
         ),
         (Route<dynamic> route) => false);
   }
