@@ -1,8 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:glistschallenge/base/base_presenter.dart';
 import 'package:glistschallenge/base/base_view.dart';
 import 'package:glistschallenge/models/tweet.dart';
 import 'package:glistschallenge/pages/tweet_page/tweet_page.dart';
+import 'package:glistschallenge/services/app_dialog.dart';
 import 'package:glistschallenge/services/app_navigator.dart';
 import 'package:glistschallenge/services/auth_service.dart';
 import 'package:glistschallenge/services/firestore_service.dart';
@@ -25,7 +25,11 @@ class HomePagePresenter extends BasePresenter<HomePageView> {
   }
 
   Future<void> deleteTweet(Tweet tweet) async {
-    _firestoreService.deleteTweet(tweet);
+    AppDialog.confirmationDialog(
+        context, "Are you sure you want to delete this tweet?", onConfirm: () {
+      _firestoreService.deleteTweet(tweet);
+      AppDialog.toast("Tweet has been deleted.");
+    });
   }
 
   Future<void> goTweetPage(Tweet tweet) async {

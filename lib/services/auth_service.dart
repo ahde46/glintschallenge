@@ -1,4 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:glistschallenge/services/app_dialog.dart';
 import 'package:glistschallenge/services/firestore_service.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -28,9 +30,13 @@ class AuthService {
 
       await FirestoreService().upsertUserData(user);
 
+      AppDialog.toast("Sign in successfully.");
+
       return user;
     } catch (e) {
-      print(e);
+      if (e is FirebaseAuthException) {
+        AppDialog.toast(e.message);
+      }
 
       return null;
     }
@@ -56,13 +62,15 @@ class AuthService {
 
         await FirestoreService().upsertUserData(user);
 
+        AppDialog.toast("Sign in successfully.");
+
         return user;
       } else {
         return null;
       }
     } catch (e) {
       if (e is FirebaseAuthException) {
-        print(e.message);
+        AppDialog.toast(e.message);
       }
 
       return null;
@@ -78,11 +86,11 @@ class AuthService {
       User user = userCredential.user;
 
       await FirestoreService().upsertUserData(user);
-
+      AppDialog.toast("Sign up successfully.");
       return user;
     } catch (e) {
       if (e is FirebaseAuthException) {
-        print(e.message);
+        AppDialog.toast(e.message);
       }
 
       return null;
@@ -93,9 +101,10 @@ class AuthService {
   Future<void> resetPassword(String email) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
+      AppDialog.toast("A new password has been sent to your email.");
     } catch (e) {
       if (e is FirebaseAuthException) {
-        print(e.message);
+        AppDialog.toast(e.message);
       }
 
       return null;
@@ -108,6 +117,8 @@ class AuthService {
       await _auth.signOut();
       if (await GoogleSignIn().isSignedIn()) {
         await GoogleSignIn().signOut();
+
+        AppDialog.toast("Sign out successfully.");
       }
     } catch (e) {}
   }

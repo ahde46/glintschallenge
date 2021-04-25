@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:glistschallenge/base/base_presenter.dart';
 import 'package:glistschallenge/base/base_view.dart';
 import 'package:glistschallenge/models/tweet.dart';
+import 'package:glistschallenge/services/app_dialog.dart';
 import 'package:glistschallenge/services/app_navigator.dart';
 import 'package:glistschallenge/services/auth_service.dart';
 import 'package:glistschallenge/services/firestore_service.dart';
@@ -27,7 +28,8 @@ class TweetPagePresenter extends BasePresenter<TweetPageView> {
 
       //if await, offline mode will be stucked here..
       _firestoreService.upsertTweet(tweet);
-
+      AppDialog.toast(
+          isEdit ? "Tweet has been updated." : "Tweet has been posted.");
       AppNavigator.back(context);
     }
   }
