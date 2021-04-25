@@ -21,7 +21,7 @@ class AppNavigator {
     );
   }
 
-  static back(BuildContext context) {
+  static void back(BuildContext context) {
     Navigator.pop(context);
   }
 

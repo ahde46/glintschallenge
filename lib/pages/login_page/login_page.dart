@@ -51,7 +51,7 @@ class _LoginPageState extends State<LoginPage> implements LoginPageView {
                         icon: Icon(Icons.email),
                         hintText: "Email Address"),
                     onChanged: (String text) {
-                      // widget.presenter.tempUser.email = text;
+                      _presenter.email = text;
                     },
                     validator: (String text) {
                       if (text == null || text.isEmpty)
@@ -73,14 +73,14 @@ class _LoginPageState extends State<LoginPage> implements LoginPageView {
                         icon: Icon(Icons.lock),
                         hintText: "Password"),
                     onChanged: (String text) {
-                      // widget.presenter.tempUser.email = text;
+                      _presenter.password = text;
                     },
                     validator: (String text) {
                       if (text == null || text.length < 8)
                         return 'Password must be greater than 8 characters.';
                     },
                     onFieldSubmitted: (_) {
-                      _presenter.login();
+                      _presenter.loginWithEmail();
                     },
                   ),
                   Padding(
@@ -105,7 +105,7 @@ class _LoginPageState extends State<LoginPage> implements LoginPageView {
                       style: TextStyle(fontSize: 16),
                     ),
                     onPressed: () {
-                      _presenter.login();
+                      _presenter.loginWithEmail();
                     },
                   ),
                   Padding(
@@ -125,7 +125,9 @@ class _LoginPageState extends State<LoginPage> implements LoginPageView {
                           ),
                         ],
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        _presenter.loginWithGoogle();
+                      },
                     ),
                   ),
                   Row(
