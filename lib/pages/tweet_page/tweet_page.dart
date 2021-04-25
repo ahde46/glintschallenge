@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:glistschallenge/models/tweet.dart';
 import 'package:glistschallenge/pages/tweet_page/tweet_page_presenter.dart';
-import 'package:glistschallenge/shared_widgets/buttons/long_button.dart';
 
 class TweetPage extends StatefulWidget {
-  final String tweetText;
+  final Tweet tweet;
 
-  TweetPage({this.tweetText});
+  TweetPage({this.tweet});
 
   @override
   _TweetPageState createState() => _TweetPageState();
@@ -14,13 +14,14 @@ class TweetPage extends StatefulWidget {
 class _TweetPageState extends State<TweetPage> implements TweetPageView {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TweetPagePresenter _presenter = TweetPagePresenter();
-  bool isEdit = false;
   @override
   void initState() {
     _presenter.init(this, context);
-    if (widget.tweetText != null) {
-      isEdit = true;
-      _presenter.tweet = widget.tweetText;
+    if (widget.tweet != null) {
+      _presenter.isEdit = true;
+      _presenter.tweet = widget.tweet;
+    } else {
+      _presenter.tweet = Tweet();
     }
 
     super.initState();
@@ -33,52 +34,44 @@ class _TweetPageState extends State<TweetPage> implements TweetPageView {
           .unfocus(), //tap everywhere to unfocus
       child: Scaffold(
         appBar: AppBar(
-          title: Text(isEdit ? "Edit Tweet" : "Create Tweet"),
+          title: Text(_presenter.isEdit ? "Edit Tweet" : "Create Tweet"),
           centerTitle: true,
+          actions: [
+            InkWell(
+              onTap: () {
+                _presenter.postTweet();
+              },
+              child: Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.symmetric(horizontal: 25),
+                child: Text(
+                  _presenter.isEdit ? "Save" : "Post",
+                  style: TextStyle(fontSize: 14),
+                ),
+              ),
+            ),
+          ],
         ),
         body: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 35),
+            padding: EdgeInsets.symmetric(vertical: 35, horizontal: 35),
             child: Form(
               key: formKey,
-              child: Column(
-                children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 50),
-                    child: Text(
-                      "What's on your mind?",
-                      style: TextStyle(color: Colors.grey[500], fontSize: 22),
-                    ),
-                  ),
-                  TextFormField(
-                    initialValue: _presenter.tweet,
-                    textCapitalization: TextCapitalization.none,
-                    textInputAction: TextInputAction.newline,
-                    maxLength: 280,
-                    maxLines: 8,
-                    decoration: InputDecoration(
-                        isDense: true, hintText: "write something here..."),
-                    onChanged: (String text) {
-                      _presenter.tweet = text;
-                    },
-                    validator: (String text) {
-                      if (text == null || text.isEmpty)
-                        return 'Tweet can\'t be empty.';
-                    },
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 60.0),
-                    child: LongButton(
-                      child: Text(
-                        isEdit ? "Save" : "Post",
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      onPressed: () {
-                        _presenter.sendTweet();
-                      },
-                    ),
-                  ),
-                ],
+              child: TextFormField(
+                initialValue: _presenter.tweet.text,
+                textCapitalization: TextCapitalization.none,
+                textInputAction: TextInputAction.newline,
+                maxLength: 280,
+                maxLines: 8,
+                decoration: InputDecoration(
+                    isDense: true, hintText: "What's on your mind..."),
+                onChanged: (String text) {
+                  _presenter.tweet.text = text;
+                },
+                validator: (String text) {
+                  if (text == null || text.isEmpty)
+                    return 'Tweet can\'t be empty.';
+                },
               ),
             ),
           ),

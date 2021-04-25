@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:glistschallenge/models/tweet.dart';
+import 'package:intl/intl.dart';
 
 class TweetTile extends StatelessWidget {
-  final Function onEdit;
-  final Function onDelete;
+  final Tweet tweet;
+  final Function(Tweet) onEdit;
+  final Function(Tweet) onDelete;
 
-  TweetTile({this.onEdit, this.onDelete});
+  TweetTile(this.tweet, {this.onEdit, this.onDelete});
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +20,13 @@ class TweetTile extends StatelessWidget {
           padding: EdgeInsets.all(12),
           decoration: BoxDecoration(),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Date here"),
+                  Text(
+                      DateFormat("dd MMM yyyy h:mm a").format(tweet.createdAt)),
                   PopupMenuButton<String>(
                     icon: Icon(Icons.more_vert),
                     onSelected: choiceAction,
@@ -29,18 +34,21 @@ class TweetTile extends StatelessWidget {
                       return ["Edit", "Delete"].map((String option) {
                         return PopupMenuItem<String>(
                           value: option,
-                          child: Container(
-                              alignment: Alignment.center,
-                              width: 80,
-                              child: Text(option)),
+                          child: Text(option),
                         );
                       }).toList();
                     },
                   ),
                 ],
               ),
-              Text(
-                  "He determined to drop his litigation with the monastry, and relinguish his claims to the wood-cuting and fishery rihgts at once. He was the more ready to do this becuase the rights had becom much less valuable, and he had indeed the vaguest idea where the wood and river in quedtion were")
+              Text(tweet.text),
+              tweet.updatedAt != null
+                  ? Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Text(DateFormat("dd MMM yyyy h:mm a")
+                          .format(tweet.updatedAt)),
+                    )
+                  : SizedBox.shrink(),
             ],
           ),
         ),
@@ -51,10 +59,10 @@ class TweetTile extends StatelessWidget {
   void choiceAction(String action) async {
     switch (action) {
       case "Edit":
-        if (onEdit != null) onEdit();
+        if (onEdit != null) onEdit(tweet);
         break;
       case "Delete":
-        if (onDelete != null) onDelete();
+        if (onDelete != null) onDelete(tweet);
         break;
       default:
     }

@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:glistschallenge/services/firestore_service.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
@@ -13,12 +14,19 @@ class AuthService {
     return _auth.authStateChanges();
   }
 
+  //get current user uid
+  String getCurrentUserUid() {
+    return _auth.currentUser.uid;
+  }
+
   //sign in with email & password
   Future<User> signInWithEmailPassword(String email, String password) async {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       User user = userCredential.user;
+
+      await FirestoreService().upsertUserData(user);
 
       return user;
     } catch (e) {
@@ -46,6 +54,8 @@ class AuthService {
             await _auth.signInWithCredential(credential);
         User user = userCredential.user;
 
+        await FirestoreService().upsertUserData(user);
+
         return user;
       } else {
         return null;
@@ -66,6 +76,8 @@ class AuthService {
       UserCredential userCredential = await _auth
           .createUserWithEmailAndPassword(email: email, password: password);
       User user = userCredential.user;
+
+      await FirestoreService().upsertUserData(user);
 
       return user;
     } catch (e) {
@@ -94,6 +106,9 @@ class AuthService {
   Future<void> signOut() async {
     try {
       await _auth.signOut();
+      if (await GoogleSignIn().isSignedIn()) {
+        await GoogleSignIn().signOut();
+      }
     } catch (e) {}
   }
 }
