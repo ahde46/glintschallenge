@@ -17,16 +17,18 @@ class TweetTile extends StatelessWidget {
         elevation: 1,
         borderRadius: BorderRadius.circular(6),
         child: Container(
-          padding: EdgeInsets.all(12),
+          padding: EdgeInsets.only(left: 12, bottom: 12),
           decoration: BoxDecoration(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                      DateFormat("dd MMM yyyy h:mm a").format(tweet.createdAt)),
+                  Expanded(
+                    child: Text(tweet.text),
+                  ),
                   PopupMenuButton<String>(
                     icon: Icon(Icons.more_vert),
                     onSelected: choiceAction,
@@ -41,12 +43,23 @@ class TweetTile extends StatelessWidget {
                   ),
                 ],
               ),
-              Text(tweet.text),
+              Text(
+                'created at: ${DateFormat("dd MMM yy h:mm a").format(tweet.createdAt)}',
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 13,
+                ),
+              ),
               tweet.updatedAt != null
                   ? Padding(
-                      padding: const EdgeInsets.only(top: 10.0),
-                      child: Text(DateFormat("dd MMM yyyy h:mm a")
-                          .format(tweet.updatedAt)),
+                      padding: const EdgeInsets.only(top: 0.0),
+                      child: Text(
+                        'updated at: ${DateFormat("dd MMM yy h:mm a").format(tweet.updatedAt)}',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 13,
+                        ),
+                      ),
                     )
                   : SizedBox.shrink(),
             ],

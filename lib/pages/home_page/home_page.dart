@@ -1,8 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:glistschallenge/models/tweet.dart';
 import 'package:glistschallenge/pages/home_page/home_page_presenter.dart';
 import 'package:glistschallenge/pages/home_page/ui/tweet_tile.dart';
+import 'package:glistschallenge/pages/home_page/ui/user_info_section.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -44,28 +46,46 @@ class _HomePageState extends State<HomePage> implements HomePageView {
             ),
           ],
         ),
-        body: StreamBuilder<List<Tweet>>(
-            stream: _presenter.getTweetsStream(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return ListView.builder(
-                    itemCount: snapshot.data.length,
-                    padding: EdgeInsets.only(bottom: 100),
-                    itemBuilder: (context, i) {
-                      Tweet tweet = snapshot.data[i];
+        body: Column(
+          children: [
+            UserInfoSection(),
+            Expanded(
+              child: StreamBuilder<List<Tweet>>(
+                  stream: _presenter.getTweetsStream(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      if (snapshot.data.length == 0) {
+                        return Center(
+                          child: Text(
+                              "Click the + button to write your first tweet."),
+                        );
+                      }
+                      return ListView.builder(
+                          itemCount: snapshot.data.length,
+                          padding: EdgeInsets.only(bottom: 100),
+                          itemBuilder: (context, i) {
+                            Tweet tweet = snapshot.data[i];
 
-                      return TweetTile(
-                        tweet,
-                        onEdit: _presenter.goTweetPage,
-                        onDelete: _presenter.deleteTweet,
+                            return TweetTile(
+                              tweet,
+                              onEdit: _presenter.goTweetPage,
+                              onDelete: _presenter.deleteTweet,
+                            );
+                          });
+                    } else if (snapshot.hasError) {
+                      return Center(
+                        child: Text(
+                            "Something went wrrong, please try again later"),
                       );
-                    });
-              } else {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-            }),
+                    } else {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  }),
+            ),
+          ],
+        ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             _presenter.goTweetPage(null);

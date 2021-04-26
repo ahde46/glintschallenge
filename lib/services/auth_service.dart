@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:glistschallenge/services/app_dialog.dart';
 import 'package:glistschallenge/services/firestore_service/firestore_service.dart';
 import 'package:google_sign_in/google_sign_in.dart';
