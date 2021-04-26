@@ -118,9 +118,8 @@ class AuthService {
       await _auth.signOut();
       if (await GoogleSignIn().isSignedIn()) {
         await GoogleSignIn().signOut();
-
-        AppDialog.toast("Sign out successfully.");
       }
+      AppDialog.toast("Sign out successfully.");
     } catch (e) {}
   }
 }
