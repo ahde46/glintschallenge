@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:glistschallenge/services/app_dialog.dart';
-import 'package:glistschallenge/services/firestore_service.dart';
+import 'package:glistschallenge/services/firestore_service/firestore_service.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
@@ -10,6 +10,8 @@ class AuthService {
   AuthService.internal();
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  FirestoreService _firestoreService = FirestoreService();
 
   //auth change user stream
   Stream<User> get user {
@@ -28,7 +30,7 @@ class AuthService {
           email: email, password: password);
       User user = userCredential.user;
 
-      await FirestoreService().upsertUserData(user);
+      await _firestoreService.userRepo.upsertUserData(user);
 
       AppDialog.toast("Sign in successfully.");
 
@@ -60,7 +62,7 @@ class AuthService {
             await _auth.signInWithCredential(credential);
         User user = userCredential.user;
 
-        await FirestoreService().upsertUserData(user);
+        await _firestoreService.userRepo.upsertUserData(user);
 
         AppDialog.toast("Sign in successfully.");
 
@@ -85,7 +87,7 @@ class AuthService {
           .createUserWithEmailAndPassword(email: email, password: password);
       User user = userCredential.user;
 
-      await FirestoreService().upsertUserData(user);
+      await _firestoreService.userRepo.upsertUserData(user);
       AppDialog.toast("Sign up successfully.");
       return user;
     } catch (e) {

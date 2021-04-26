@@ -5,7 +5,7 @@ import 'package:glistschallenge/models/tweet.dart';
 import 'package:glistschallenge/services/app_dialog.dart';
 import 'package:glistschallenge/services/app_navigator.dart';
 import 'package:glistschallenge/services/auth_service.dart';
-import 'package:glistschallenge/services/firestore_service.dart';
+import 'package:glistschallenge/services/firestore_service/firestore_service.dart';
 
 abstract class TweetPageView implements BaseView {
   GlobalKey<FormState> formKey;
@@ -27,7 +27,7 @@ class TweetPagePresenter extends BasePresenter<TweetPageView> {
       tweet.userUid = AuthService().getCurrentUserUid();
 
       //if await, offline mode will be stucked here..
-      _firestoreService.upsertTweet(tweet);
+      _firestoreService.tweetRepo.upsertTweet(tweet);
       AppDialog.toast(
           isEdit ? "Tweet has been updated." : "Tweet has been posted.");
       AppNavigator.back(context);
