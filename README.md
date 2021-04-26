@@ -1,7 +1,7 @@
-# glistschallenge
+# Glists Challenge - Yap Lek De
 
-A new Flutter project.
+Hi, this is a repo for 1-Person Twitter App, created by using Flutter and backed by Firebase Firestore, feel free to check around.
 
-## Getting Started
+## User Flow
 
 ![alt text](https://github.com/ahde46/glintschallenge/blob/master/assets/read_me/user_flow.png?raw=true)
