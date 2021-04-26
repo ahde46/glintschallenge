@@ -55,8 +55,11 @@ class _SignUpPageState extends State<SignUpPage> implements SignUpPageView {
                         return 'Email is required';
 
                       if (!text.contains(RegExp(
-                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")))
+                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"))) {
                         return 'Please enter a valid email';
+                      }
+
+                      return null;
                     },
                   ),
                   SizedBox(height: 50),
@@ -73,8 +76,10 @@ class _SignUpPageState extends State<SignUpPage> implements SignUpPageView {
                       _presenter.password = text;
                     },
                     validator: (String text) {
-                      if (text == null || text.length < 8)
+                      if (text == null || text.length < 8) {
                         return 'Password must be greater than 8 characters.';
+                      }
+                      return null;
                     },
                   ),
                   SizedBox(height: 50),
@@ -91,8 +96,10 @@ class _SignUpPageState extends State<SignUpPage> implements SignUpPageView {
                       _presenter.rePassword = text;
                     },
                     validator: (String text) {
-                      if (_presenter.password != text)
+                      if (_presenter.password != text) {
                         return 'Password doesn\'t match.';
+                      }
+                      return null;
                     },
                     onFieldSubmitted: (_) {
                       _presenter.signUp();

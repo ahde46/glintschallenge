@@ -58,8 +58,10 @@ class _LoginPageState extends State<LoginPage> implements LoginPageView {
                         return 'Email is required';
 
                       if (!text.contains(RegExp(
-                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")))
+                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"))) {
                         return 'Please enter a valid email';
+                      }
+                      return null;
                     },
                   ),
                   SizedBox(height: 50),
@@ -76,8 +78,11 @@ class _LoginPageState extends State<LoginPage> implements LoginPageView {
                       _presenter.password = text;
                     },
                     validator: (String text) {
-                      if (text == null || text.length < 8)
+                      if (text == null || text.length < 8) {
                         return 'Password must be greater than 8 characters.';
+                      }
+
+                      return null;
                     },
                     onFieldSubmitted: (_) {
                       _presenter.loginWithEmail();

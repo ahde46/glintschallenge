@@ -1,10 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:glistschallenge/models/tweet.dart';
 import 'package:glistschallenge/pages/home_page/home_page_presenter.dart';
 import 'package:glistschallenge/pages/home_page/ui/tweet_tile.dart';
 import 'package:glistschallenge/pages/home_page/ui/user_info_section.dart';
-import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   @override

@@ -63,8 +63,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage>
                         return 'Email is required';
 
                       if (!text.contains(RegExp(
-                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")))
+                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"))) {
                         return 'Please enter a valid email';
+                      }
+
+                      return null;
                     },
                     onFieldSubmitted: (_) {
                       _presenter.recoverPassword();

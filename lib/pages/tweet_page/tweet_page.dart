@@ -69,8 +69,10 @@ class _TweetPageState extends State<TweetPage> implements TweetPageView {
                   _presenter.tweet.text = text;
                 },
                 validator: (String text) {
-                  if (text == null || text.isEmpty)
+                  if (text == null || text.isEmpty) {
                     return 'Tweet can\'t be empty.';
+                  }
+                  return null;
                 },
               ),
             ),
