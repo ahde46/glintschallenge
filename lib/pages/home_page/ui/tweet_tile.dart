@@ -27,7 +27,10 @@ class TweetTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    child: Text(tweet.text),
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 12.0),
+                      child: Text(tweet.text),
+                    ),
                   ),
                   PopupMenuButton<String>(
                     icon: Icon(Icons.more_vert),
@@ -44,7 +47,7 @@ class TweetTile extends StatelessWidget {
                 ],
               ),
               Text(
-                'created at: ${DateFormat("dd MMM yy h:mm a").format(tweet.createdAt)}',
+                'Created at: ${DateFormat("dd MMM yy h:mm a").format(tweet.createdAt)}',
                 style: TextStyle(
                   color: Colors.grey,
                   fontSize: 13,
@@ -54,7 +57,7 @@ class TweetTile extends StatelessWidget {
                   ? Padding(
                       padding: const EdgeInsets.only(top: 0.0),
                       child: Text(
-                        'updated at: ${DateFormat("dd MMM yy h:mm a").format(tweet.updatedAt)}',
+                        'Updated at: ${DateFormat("dd MMM yy h:mm a").format(tweet.updatedAt)}',
                         style: TextStyle(
                           color: Colors.grey,
                           fontSize: 13,
