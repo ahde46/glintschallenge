@@ -1,4 +1,4 @@
-# Glists Challenge - Yap Lek De
+# Glints Challenge - Yap Lek De
 
 Hi, this is a repo for 1-Person Twitter App, created by using Flutter and backed by Firebase Firestore, feel free to check around.
 
